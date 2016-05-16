@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
  * Created by Gosha on 2015-12-11.
  */
 public class MLApplication extends Application {
+    public static MLApplication instance;
     @Override
     public void onCreate() {
         if (Constants.Config.DEVELOPER_MODE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
@@ -28,6 +29,8 @@ public class MLApplication extends Application {
         }
         super.onCreate();
         initImageLoader(getApplicationContext());
+
+        instance = this;
     }
 
     public void initImageLoader(Context context) {

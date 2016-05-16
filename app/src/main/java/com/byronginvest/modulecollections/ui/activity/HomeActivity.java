@@ -63,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                startActivity(new Intent(ctx,UltraActivity.class));
                                 Toast.makeText(ctx, "Snackbar Click Action.", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
@@ -145,6 +146,8 @@ public class HomeActivity extends AppCompatActivity {
                                 Toast.makeText(ctx, "Snackbar Click Action.", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
+                Intent _intent = new Intent(HomeActivity.this,NetworkActivity.class);
+                startActivity(_intent);
                 break;
             case R.id.action_animation:
                 Intent intent = new Intent(HomeActivity.this,
