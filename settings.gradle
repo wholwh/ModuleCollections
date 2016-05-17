@@ -1,1 +1,1 @@
-include ':app', ':UIL', ':ULTRA', ':SwipeLayout'
+include ':app', ':UIL', ':ULTRA', ':SwipeLayout', ':volley'

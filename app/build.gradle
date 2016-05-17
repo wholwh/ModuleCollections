@@ -38,22 +38,23 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':UIL')
     //    testCompile 'junit:junit:4.12'
+    compile project(':ULTRA')
+    compile project(':volley')
+    compile project(':SwipeLayout')
+    compile files('libs/javassist.jar')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.jakewharton:butterknife:7.0.1'
     //    compile 'com.droidtitan:lint-cleaner-plugin:0.3.0'
-    compile project(':UIL')
-    compile project(':SwipeLayout')
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.koushikdutta.ion:ion:2.+'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'cglib:cglib:3.2.2'
-    compile files('libs/javassist.jar')
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
     //    compile 'in.srain.cube:cube-sdk:1.0.44@aar'
-    compile project(':ULTRA')
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okio:okio:1.8.0'
 }
