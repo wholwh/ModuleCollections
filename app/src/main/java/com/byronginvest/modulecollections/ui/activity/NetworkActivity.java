@@ -143,7 +143,13 @@ public class NetworkActivity extends AppCompatActivity {
         };
 
         requestQueue.add(stringRequest);
+
+
+        //httpclient
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

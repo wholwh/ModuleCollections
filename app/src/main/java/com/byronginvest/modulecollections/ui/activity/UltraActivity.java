@@ -42,6 +42,7 @@ public class UltraActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 //        initStoreHouseHeader();
 
 //        View header = View.inflate(ctx,R.layout.cube_views_load_more_default_footer,null);
