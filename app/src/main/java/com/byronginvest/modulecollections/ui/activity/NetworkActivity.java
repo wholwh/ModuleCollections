@@ -20,14 +20,18 @@ import com.koushikdutta.ion.Ion;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.InflaterInputStream;
 
-import cz.msebera.android.httpclient.Header;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -88,7 +92,7 @@ public class NetworkActivity extends AppCompatActivity {
                 .add("nid", "notice")
                 .add("page", "1").build();
 //        https://www.byronginvest.com/app/notice/list.html
-        Request request = new Request.Builder()
+        final Request request = new Request.Builder()
                 .url("http://www.juhengdian.com/APP/getScenic.ashx")
                 .header("Content-Type", "text/plain")
                 .header("Content-Encoding", "gzip")
@@ -111,12 +115,12 @@ public class NetworkActivity extends AppCompatActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(context, "http://www.juhengdian.com/APP/getScenic.ashx", null, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
                 Log.e("Network2", responseBody + "");
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
             }
         });
 
@@ -147,6 +151,40 @@ public class NetworkActivity extends AppCompatActivity {
 
         //httpclient
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpPost httpPost = new HttpPost("http://www.juhengdian.com/APP/getScenic.ashx");
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpResponse httpResponse = null;
+                try {
+                    httpResponse = httpClient.execute(httpPost);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                    // 获得响应流
+                    try {
+                        String resultString = null;
+                        InflaterInputStream inflaterInputStream = new InflaterInputStream(httpResponse.getEntity().getContent());
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        int c = 0;
+                        byte[] buf = new byte[4096];
+                        while (true) {
+                            c = inflaterInputStream.read(buf);
+                            if (c == -1)
+                                break;
+                            baos.write(buf, 0, c);
+                        }
+                        baos.flush();
+                        resultString = new String(baos.toByteArray(), "utf-8");
+                        Log.e("Network5", resultString);
+                    } catch (IOException e) {
+                    }
+                } else {
+                }
+            }
+        }).start();
 
     }
 
