@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -60,11 +60,11 @@ public class ListAdapter extends RecyclerView.Adapter {
     }
 
     class ListViewViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.title)
+        @BindView(R.id.title)
         TextView title;
-        @Bind(R.id.image)
+        @BindView(R.id.image)
         ImageView image;
-        @Bind(R.id.content)
+        @BindView(R.id.content)
         TextView content;
 
         public ListViewViewHolder(View itemView) {

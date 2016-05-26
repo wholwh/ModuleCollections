@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -63,18 +63,12 @@ public class CustomSimpleAdapter extends SimpleAdapter {
     }
 
 
-    /**
-     * This class contains all butterknife-injected Views & Layouts from layout file 'listitem_listview.xml'
-     * for easy to all layout elements.
-     *
-     * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
-     */
-    static class ViewHolder {
-        @Bind(R.id.title)
+    class ViewHolder {
+        @BindView(R.id.title)
         TextView title;
-        @Bind(R.id.image)
+        @BindView(R.id.image)
         ImageView image;
-        @Bind(R.id.content)
+        @BindView(R.id.content)
         TextView content;
 
         ViewHolder(View view) {

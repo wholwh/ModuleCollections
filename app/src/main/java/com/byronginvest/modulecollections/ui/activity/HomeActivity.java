@@ -3,6 +3,8 @@ package com.byronginvest.modulecollections.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,14 +27,18 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
-//        @Bind(R.id.recycler_view_list)
-//    RecyclerView recyclerViewList;
-    @Bind(R.id.listview)
+    @BindView(R.id.toolbar_layout)
+    CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.app_bar)
+    AppBarLayout appBar;
+    @BindView(R.id.listview)
     MyListView listview;
+
+
     private Context ctx = this;
     private FloatingActionButton fab;
     private Toolbar toolbar;
@@ -63,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                startActivity(new Intent(ctx,UltraActivity.class));
+                                startActivity(new Intent(ctx, UltraActivity.class));
                                 Toast.makeText(ctx, "Snackbar Click Action.", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
@@ -94,13 +100,16 @@ public class HomeActivity extends AppCompatActivity {
 //        recyclerViewList.setLayoutManager(layoutManager);
 //        recyclerViewList.setAdapter(listAdapter);
         listview.setAdapter(simpleAdapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        listview.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(HomeActivity.this, "position" + position, Toast.LENGTH_SHORT).show();
-                                                EventBus.getDefault().post(new Event.ItemOnClickEvent("EventBus", "测试消息发布订阅"));
-                                            }
-                                        }
+                        EventBus.getDefault().post(new Event.ItemOnClickEvent("EventBus", "测试消息发布订阅"));
+                        Intent intent = new Intent(ctx,MVPandRXActivity.class);
+                        startActivity(intent);
+                    }
+                }
 
         );
     }
@@ -146,7 +155,7 @@ public class HomeActivity extends AppCompatActivity {
                                 Toast.makeText(ctx, "Snackbar Click Action.", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
-                Intent _intent = new Intent(HomeActivity.this,NetworkActivity.class);
+                Intent _intent = new Intent(HomeActivity.this, NetworkActivity.class);
                 startActivity(_intent);
                 break;
             case R.id.action_animation:

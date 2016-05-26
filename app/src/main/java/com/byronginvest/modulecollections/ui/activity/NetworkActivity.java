@@ -201,6 +201,10 @@ public class NetworkActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+
+            case R.id.action_settings:
+
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

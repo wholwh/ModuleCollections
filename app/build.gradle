@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.1'
     defaultConfig {
         applicationId "com.byronginvest.modulecollections"
         minSdkVersion 16
@@ -15,7 +16,16 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable false
+            renderscriptDebuggable false
+            minifyEnabled false
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            pseudoLocalesEnabled true
         }
     }
     productFlavors {
@@ -36,10 +46,22 @@ android {
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
     }
+
+    //这个是解决lint报错的代码
+    lintOptions {
+        abortOnError false
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    //    compile(name:'rxandroid-1.2.0', ext:'aar')
     compile project(':UIL')
     //    testCompile 'junit:junit:4.12'
     compile project(':ULTRA')
@@ -48,7 +70,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.code.gson:gson:2.5'
-    compile 'com.jakewharton:butterknife:7.0.1'
+    //    compile 'com.jakewharton:butterknife:7.0.1'
     //    compile 'com.droidtitan:lint-cleaner-plugin:0.3.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.koushikdutta.ion:ion:2.+'
@@ -61,4 +83,9 @@ dependencies {
     compile project(':volley')
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.facebook.fresco:fresco:0.10.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp3:0.10.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

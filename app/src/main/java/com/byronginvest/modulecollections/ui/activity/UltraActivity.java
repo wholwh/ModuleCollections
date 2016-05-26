@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import com.byronginvest.modulecollections.R;
 import com.byronginvest.modulecollections.data.util.DensityUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -25,9 +25,9 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 public class UltraActivity extends AppCompatActivity {
 //    @Bind(R.id.store_house_ptr_image)
 //    CubeImageView storeHousePtrImage;
-    @Bind(R.id.store_house_ptr_image_content)
+    @BindView(R.id.store_house_ptr_image_content)
     LinearLayout storeHousePtrImageContent;
-    @Bind(R.id.store_house_ptr_frame)
+    @BindView(R.id.store_house_ptr_frame)
     PtrFrameLayout storeHousePtrFrame;
 
 

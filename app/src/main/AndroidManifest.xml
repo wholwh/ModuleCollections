@@ -31,5 +31,6 @@
         <activity android:name=".ui.activity.AnimationActivity" />
         <activity android:name=".ui.activity.UltraActivity" />
         <activity android:name=".ui.activity.NetworkActivity" />
+        <activity android:name=".ui.activity.MVPandRXActivity"/>
     </application>
 </manifest>
