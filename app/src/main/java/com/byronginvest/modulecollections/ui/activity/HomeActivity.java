@@ -76,9 +76,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        ImageLoader.getInstance().displayImage("http://imgsrc.baidu.com/forum/pic/item/ec43564e9258d109ad29cde7d758ccbf6d814db7.jpg",imgImage);
         EventBus.getDefault().register(this);
         initView();
+
+//        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(10,10);
+//        lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+
     }
 
     private void initView() {
@@ -107,7 +110,15 @@ public class HomeActivity extends AppCompatActivity {
 //                Toast.makeText(HomeActivity.this, "position" + position, Toast.LENGTH_SHORT).show();
                         EventBus.getDefault().post(new Event.ItemOnClickEvent("EventBus", "测试消息发布订阅"));
                         Intent intent = new Intent(ctx,MVPandRXActivity.class);
+//                        Example example = new Example();
+//                        example.setName("hello world");
+//                        example.setNum(8);
+//                        intent.putExtra("obj", Parcels.wrap(example));
                         startActivity(intent);
+
+//                        JSON.parseObject("",Example.class);
+
+
                     }
                 }
 

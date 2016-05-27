@@ -1,10 +1,10 @@
 package com.byronginvest.modulecollections.ui.custom;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.multidex.MultiDexApplication;
 
 import com.byronginvest.modulecollections.data.constant.Constants;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -26,7 +26,7 @@ import okhttp3.OkHttpClient;
 /**
  * Created by Gosha on 2015-12-11.
  */
-public class MLApplication extends Application {
+public class MLApplication extends MultiDexApplication {
     public static MLApplication instance;
 
     @Override

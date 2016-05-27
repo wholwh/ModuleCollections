@@ -49,7 +49,14 @@ public class MVPandRXActivity extends AppCompatActivity implements UserView {
         progressDialog.setMessage("正在加载，请稍后..");
 
         setListener();
+//        test();
     }
+
+//    private void test() {
+//        Example example = Parcels.unwrap(getIntent().getParcelableExtra("obj"));
+//        Log.e("Obj",example.getName());
+//        Toast.makeText(context, example.getName(), Toast.LENGTH_SHORT).show();
+//    }
 
     private void setListener() {
         btnUpdatename.setOnClickListener(new View.OnClickListener() {
