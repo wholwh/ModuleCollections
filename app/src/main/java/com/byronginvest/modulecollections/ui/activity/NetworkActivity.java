@@ -26,8 +26,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.InflaterInputStream;
@@ -66,7 +69,27 @@ public class NetworkActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<byte[]>() {
                     @Override
                     public void onCompleted(Exception e, byte[] result) {
-                        Log.e("Network3", result.toString());
+                        try {
+                            String resultString = null;
+                            InputStream sbs = new ByteArrayInputStream(result);
+                            InflaterInputStream inflaterInputStream = new InflaterInputStream(sbs);
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            int c = 0;
+                            byte[] buf = new byte[4096];
+                            while (true) {
+                                c = inflaterInputStream.read(buf);
+                                if (c == -1)
+                                    break;
+                                baos.write(buf, 0, c);
+                            }
+                            baos.flush();
+                            resultString = new String(baos.toByteArray(), "utf-8");
+                            Log.e("Network3", resultString);
+                        } catch (UnsupportedEncodingException ex) {
+                            ex.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 });
 
@@ -106,8 +129,27 @@ public class NetworkActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.e("Network1", response.body().string());
-
+                try {
+                    String resultString = null;
+                    InputStream sbs = new ByteArrayInputStream(response.body().bytes());
+                    InflaterInputStream inflaterInputStream = new InflaterInputStream(sbs);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    int c = 0;
+                    byte[] buf = new byte[4096];
+                    while (true) {
+                        c = inflaterInputStream.read(buf);
+                        if (c == -1)
+                            break;
+                        baos.write(buf, 0, c);
+                    }
+                    baos.flush();
+                    resultString = new String(baos.toByteArray(), "utf-8");
+                    Log.e("Network1", resultString);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -116,7 +158,27 @@ public class NetworkActivity extends AppCompatActivity {
         client.post(context, "http://www.juhengdian.com/APP/getScenic.ashx", null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
-                Log.e("Network2", responseBody + "");
+                try {
+                    String resultString = null;
+                    InputStream sbs = new ByteArrayInputStream(responseBody);
+                    InflaterInputStream inflaterInputStream = new InflaterInputStream(sbs);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    int c = 0;
+                    byte[] buf = new byte[4096];
+                    while (true) {
+                        c = inflaterInputStream.read(buf);
+                        if (c == -1)
+                            break;
+                        baos.write(buf, 0, c);
+                    }
+                    baos.flush();
+                    resultString = new String(baos.toByteArray(), "utf-8");
+                    Log.e("Network2", resultString);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -145,6 +207,7 @@ public class NetworkActivity extends AppCompatActivity {
                 return map;
             }
         };
+
 
         requestQueue.add(stringRequest);
 

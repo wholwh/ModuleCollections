@@ -46,6 +46,8 @@ public class MLApplication extends MultiDexApplication {
         OkHttpClient okHttpClient = new OkHttpClient(); // build on your own
         ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
                 .newBuilder(this, okHttpClient)
+                .setBitmapsConfig(Bitmap.Config.ARGB_8888)
+                .setWebpSupportEnabled(true)
                 .build();
         Fresco.initialize(this,config);
     }
