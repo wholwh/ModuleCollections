@@ -109,18 +109,21 @@ public class HomeActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(HomeActivity.this, "position" + position, Toast.LENGTH_SHORT).show();
                         EventBus.getDefault().post(new Event.ItemOnClickEvent("EventBus", "测试消息发布订阅"));
-                        switch(position){
+                        switch (position) {
                             case 0:
-                                Intent intent = new Intent(ctx, MVPandRXActivity.class);
-                                startActivity(intent);
+                                startActivity(new Intent(ctx, MVPandRXActivity.class));
                                 break;
                             case 1:
-                                Intent _intent = new Intent(ctx, ImageLoadActivity.class);
-                                startActivity(_intent);
+                                startActivity(new Intent(ctx, ImageLoadActivity.class));
                                 break;
                             case 2:
-                                Intent __intent = new Intent(ctx, MVPandRetrofitActivity.class);
-                                startActivity(__intent);
+                                startActivity(new Intent(ctx, MVPandRetrofitActivity.class));
+                                break;
+                            case 3:
+                                startActivity(new Intent(ctx, MVPSampleActivity.class));
+                                break;
+                            case 4:
+                                startActivity(new Intent(ctx, BannerActivity.class));
                                 break;
                         }
 //                        Intent intent = new Intent(ctx, MVPandRXActivity.class);

@@ -116,7 +116,7 @@ public class NetworkActivity extends AppCompatActivity {
                 .add("page", "1").build();
 //        https://www.byronginvest.com/app/notice/list.html
         final Request request = new Request.Builder()
-                .url("http://www.juhengdian.com/APP/getScenic.ashx")
+                .url("https://www.byronginvest.com/app/a.html")
                 .header("Content-Type", "text/plain")
                 .header("Content-Encoding", "gzip")
                 .post(body)
@@ -129,27 +129,7 @@ public class NetworkActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String resultString = null;
-                    InputStream sbs = new ByteArrayInputStream(response.body().bytes());
-                    InflaterInputStream inflaterInputStream = new InflaterInputStream(sbs);
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    int c = 0;
-                    byte[] buf = new byte[4096];
-                    while (true) {
-                        c = inflaterInputStream.read(buf);
-                        if (c == -1)
-                            break;
-                        baos.write(buf, 0, c);
-                    }
-                    baos.flush();
-                    resultString = new String(baos.toByteArray(), "utf-8");
-                    Log.e("Network1", resultString);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    Log.e("Network1", response.toString());
             }
         });
 
